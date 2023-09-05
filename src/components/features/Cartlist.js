@@ -1,28 +1,32 @@
 import React from 'react'
 
-export default function Cartlist() {
+export default function Cartlist(props) {
     return (
-        <div className="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table className="table-auto w-full text-left whitespace-no-wrap">
+        <div className="lg:w-2/3 w-full mx-auto">
+            {props.List.length !== 0 ? <table className="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                     <tr>
                         <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Item</th>
                         <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Price</th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Remove</th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="px-4 py-3">Start</td>
-                        <td className="px-4 py-3">5 Mb/s</td>
-                        <td className="px-4 py-3">
-                            <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-                            </button>
-                        </td>
-                    </tr>
+                    {
+                        props.List.map((obj) => (
+                            <tr>
+                                <td className="px-4 py-3" id={`Item${props.List.indexOf(obj)}`}>{obj.Item}</td>
+                                <td className="px-4 py-3">{obj.Price}</td>
+                                <td className="px-4 py-3">
+                                    <button id={props.List.indexOf(obj)}>
+                                        Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
-            </table>
+            </table> : <p className='text-5xl pt-20'>The cart is empty.</p>}
         </div>
     )
 }

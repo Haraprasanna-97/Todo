@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Todolist(props) {
     return (
-        <div className="lg:w-full w-full mx-auto overflow-auto mb-24">
+        <div className="lg:w-full w-full mx-auto mb-24 overflow-auto">
             {props.List.length !== 0 ? <table className="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                     <tr>
@@ -14,7 +14,7 @@ export default function Todolist(props) {
                     {
                         props.List.map((item) => (
                             <tr>
-                                <td className="px-4 py-3" id={`Task${props.List.indexOf(item)}`}>{item.Task}</td>
+                                <td className="px-4 py-3" id={`Item${props.List.indexOf(item)}`}>{item.Task}</td>
                                 <td className="px-4 py-3 flex gap-5">
                                     <button id={props.List.indexOf(item)} onClick={props.MarkAsCompleted}>Mark as completed</button>
                                     <button id={props.List.indexOf(item)} onClick={props.DeleteItem}>Delete</button>
@@ -23,7 +23,7 @@ export default function Todolist(props) {
                         ))
                     }
                 </tbody>
-            </table> : "The list is empty. Please consider adding itoms to the same"}
+            </table> : <p className='text-5xl pt-20'>The list is empty.</p>}
         </div>
     )
 }
