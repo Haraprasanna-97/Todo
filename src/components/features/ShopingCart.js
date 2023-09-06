@@ -40,13 +40,26 @@ export default function ShopingCart() {
             document.getElementById("Price").focus()
         }
     }
+
+    const handleDeleteItemFromList = (e) => {
+		let newList = []
+		let Index = Number.parseInt(e.target.id)
+		for (const slno in List) {
+			if (Number.parseInt(slno) === Index) {
+				setTotal(Total - List[slno].Price)
+				continue
+			}
+			newList.push(List[slno])
+		}
+		setList(newList)
+	}
     return (
         <div className="container px-5 py-7 mx-auto">
             <div className="flex flex-col text-center w-full mb-12 border-b-4 border-orange-700">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Shoping cart</h1>
             </div>
 
-            <Cartlist List={List} />
+            <Cartlist List={List} RemoveItem = {handleDeleteItemFromList} />
 
             <div className="flex flex-row text-center w-full mb-5 border-t-4 border-orange-700 fixed left-0 right-0 bottom-0">
                 <div className="flex flex-wrap -m-2 w-3/4 mx-4">

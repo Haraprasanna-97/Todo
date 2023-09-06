@@ -18,7 +18,7 @@ export default function Cartlist(props) {
                                 <td className="px-4 py-3" id={`Item${props.List.indexOf(obj)}`}>{obj.Item}</td>
                                 <td className="px-4 py-3">{obj.Price}</td>
                                 <td className="px-4 py-3">
-                                    <button id={props.List.indexOf(obj)}>
+                                    <button id={props.List.indexOf(obj)} onClick={props.RemoveItem}>
                                         Remove
                                     </button>
                                 </td>
