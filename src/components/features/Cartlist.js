@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Cartlist(props) {
     return (
-        <div className="lg:w-2/3 w-full mx-auto">
+        <div className="lg:w-full w-full mb-24 mx-auto">
             {props.List.length !== 0 ? <table className="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                     <tr>

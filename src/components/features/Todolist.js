@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Todolist(props) {
     return (
-        <div className="lg:w-full w-full mx-auto mb-24 overflow-auto">
+        <div className="lg:w-full w-full mx-auto mb-24">
             {props.List.length !== 0 ? <table className="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                     <tr>

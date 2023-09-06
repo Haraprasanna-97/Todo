@@ -61,7 +61,7 @@ export default function ShopingCart() {
 
             <Cartlist List={List} RemoveItem = {handleDeleteItemFromList} />
 
-            <div className="flex flex-row text-center w-full mb-5 border-t-4 border-orange-700 fixed left-0 right-0 bottom-0">
+            <div className="flex flex-row text-center w-full mb-5 border-t-4 border-orange-700 fixed left-0 right-0 bottom-0 bg-white">
                 <div className="flex flex-wrap -m-2 w-3/4 mx-4">
                     <div className="p-2 w-1/2">
                         <div className="relative">
