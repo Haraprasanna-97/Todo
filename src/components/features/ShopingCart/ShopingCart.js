@@ -65,13 +65,13 @@ export default function ShopingCart() {
                 <div className="flex flex-wrap -m-2 w-3/4 mx-4">
                     <div className="p-2 w-1/2">
                         <div className="relative">
-                            <label for="Item" className="leading-7 text-sm text-gray-600">Item</label>
+                            <label htmlFor="Item" className="leading-7 text-sm text-gray-600">Item</label>
                             <input type="text" id="Item" name="first_name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={handleItemInput} value={Item} onKeyDown={handelEnterKeyPress}/>
                         </div>
                     </div>
                     <div className="p-2 w-1/2">
                         <div className="relative">
-                            <label for="Price" className="leading-7 text-sm text-gray-600">Price</label>
+                            <label htmlFor="Price" className="leading-7 text-sm text-gray-600">Price</label>
                             <input type="text" id="Price" name="last_name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={handlePriceInput} value={Price} onKeyDown={handelEnterKeyPress}/>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ export default function ShopingCart() {
                     <div className="flex flex-wrap -m-2">
                         <div className="p-2 w-full">
                             <div className="relative">
-                                <label for="last_name" className="leading-7 text-sm text-gray-600">Total</label>
+                                <label htmlFor="last_name" className="leading-7 text-sm text-gray-600">Total</label>
                                 <h1 className="text-3xl">{Total}</h1>
                             </div>
                         </div>

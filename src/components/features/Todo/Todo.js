@@ -75,7 +75,7 @@ export default function Todo() {
 				<div className="flex flex-wrap -m-2 w-full mx-4">
 					<div className="p-2 w-full">
 						<div className="relative">
-							<label for="first_name" className="leading-7 text-sm text-gray-600">Task</label>
+							<label htmlFor="first_name" className="leading-7 text-sm text-gray-600">Task</label>
 							<input type="text" id="first_name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={handleTaskInput} onKeyDown={handelKeyPress} value={Task.Task} />
 						</div>
 					</div>
@@ -88,13 +88,13 @@ export default function Todo() {
 					<div className="flex flex-wrap -m-2">
 						<div className="p-2 w-1/2">
 							<div className="relative">
-								<label for="last_name" className="leading-7 text-sm text-gray-600">Total</label>
+								<label htmlFor="last_name" className="leading-7 text-sm text-gray-600">Total</label>
 								<h1 className="text-3xl">{List.length}</h1>
 							</div>
 						</div>
 						<div className="p-2 w-1/2">
 							<div className="relative">
-								<label for="last_name" className="leading-7 text-sm text-gray-600">Completed</label>
+								<label htmlFor="last_name" className="leading-7 text-sm text-gray-600">Completed</label>
 								<h1 className="text-3xl">{completedCount}</h1>
 							</div>
 						</div>
