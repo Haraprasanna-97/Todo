@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 export default function Contact() {
-    const [FirstName, setFirstName] = useState()
-    const [LastName, setLastName] = useState()
+    const [FirstName, setFirstName] = useState("")
+    const [LastName, setLastName] = useState("")
     const [Phone, setPhone] = useState("")
-    const [Email, setEmail] = useState()
-    const [Message, setMessage] = useState()
+    const [Email, setEmail] = useState("")
+    const [Message, setMessage] = useState("")
 
     const handleChangeName = (e) => {
         if(e.target.name === "last_name"){
@@ -36,7 +36,7 @@ export default function Contact() {
     }
 
     const handleSend = (e) => {
-        if(FirstName === LastName === Email === Message === ""){
+        if(FirstName === "" || LastName === "" || Email === "" || Message === ""){
             alert("Please fill all requred fields")
         }
         else{
