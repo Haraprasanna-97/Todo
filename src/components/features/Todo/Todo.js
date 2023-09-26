@@ -51,7 +51,7 @@ export default function Todo() {
 		for (const slno in List) {
 			if (Number.parseInt(slno) === Index) {
 				List[slno].Completed = !List[slno].Completed
-				document.getElementById(`Task${slno}`).classList.toggle("line-through")
+				document.getElementById(`Item${slno}`).classList.toggle("line-through")
 				if (List[slno].Completed) {
 					setCompletedCount(completedCount + 1)
 					document.getElementById(`${Index}`).innerHTML = "Mark as not completed"

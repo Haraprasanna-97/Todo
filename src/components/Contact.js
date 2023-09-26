@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from 'react'
 
 export default function Contact() {
@@ -34,16 +35,19 @@ export default function Contact() {
     const handleChangeMessage = (e) => {
         setMessage(e.target.value)
     }
-
-    const handleSend = (e) => {
+    
+    const handleSend = async (e) => {
         if(FirstName === "" || LastName === "" || Email === "" || Message === ""){
             alert("Please fill all requred fields")
         }
         else{
-            console.log(`Name = ${FirstName} ${LastName}`)
-            console.log(`Phone = ${Phone}`)
-            console.log(`Email = ${Email}`)
-            console.log(`Message = ${Message}`)
+            let response = await axios.post("http://localhost:3000/",{
+                Name : `${FirstName} ${LastName}`,
+                Phone : Phone,
+                Email : Email,
+                Message : Message
+            })
+            alert(response.data)
         }
     }
     return (
