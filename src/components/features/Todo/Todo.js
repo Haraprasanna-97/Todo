@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Todolist from "./Todolist"
 
 export default function Todo() {
+	const [ListName,setListName] = useState("To Do")
+	const [EditListName,setEditListName] = useState(false)
 	const [List, setList] = useState([])
 	const [Task, setTask] = useState({
 		Task: "",
@@ -18,7 +20,6 @@ export default function Todo() {
 
 	const handleAddToList = () => {
 		List.push(Task)
-		// setList(List)
 		setTask({
 			Task: "",
 			Completed: false
@@ -63,10 +64,30 @@ export default function Todo() {
 			}
 		}
 	}
+
+	const handleToggleEditMode = () => {
+		setEditListName(!EditListName)
+		console.log(EditListName)
+		document.getElementById("EditListNameInput").classList.toggle("hidden")
+		document.getElementById("EditListNameInput").focus()
+		document.getElementById("EditListName").classList.toggle("hidden")
+	}				
+	
+	const handleListNameChange = (e) => {
+		setListName(e.target.value)
+	}
+
+	const handelEnterKeyPress = (e) => {
+		if (e.key === "Enter" && ListName !== "") {
+			handleToggleEditMode()
+		}
+	}
 	return (
 		<div className="container px-5 py-7 mx-auto">
 			<div className="flex flex-col text-center w-full mb-12 border-b-4 border-orange-700">
-				<h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">To Do</h1>
+				<input id = "EditListNameInput" type="text" value={ListName} onChange={handleListNameChange} className='hidden sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center' onKeyDown={handelEnterKeyPress}/>
+				<h1 id = "EditListName" className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" onClick={handleToggleEditMode}>{ListName}</h1>
+				<button className='rounded-2xl bg-blue-200 mr-3 px-3' onClick={handleToggleEditMode}>{!EditListName ? "Edit" : "Done"}</button>
 			</div>
 
 			<Todolist List={List} DeleteItem={handleDeleteFromList} MarkAsCompleted={handleMarkAsCompleted} />

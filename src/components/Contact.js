@@ -6,6 +6,7 @@ export default function Contact() {
     const [LastName, setLastName] = useState("")
     const [Phone, setPhone] = useState("")
     const [Email, setEmail] = useState("")
+    const [EmailSttus, setEmailStatus] = useState(false)
     const [Message, setMessage] = useState("")
 
     const handleChangeName = (e) => {
@@ -27,8 +28,9 @@ export default function Contact() {
     const validateEmail = (e) => {
         let email = e.target.value
         let emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        setEmail(e.target.value)
         if(emailRegEx.test(String(email).toLowerCase())){
-            setEmail(e.target.value)
+            setEmailStatus(true)
         }
     }
 
@@ -81,6 +83,7 @@ export default function Contact() {
                             <div className="relative">
                                 <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
                                 <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={validateEmail} value={Email}/>
+                                <small>{Email === "" ? "" : EmailSttus ? "Valid" : "Invalid"}</small>
                             </div>
                         </div>
                         <div className="p-2 w-full">
