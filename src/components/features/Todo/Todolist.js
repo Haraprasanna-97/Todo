@@ -17,7 +17,7 @@ export default function Todolist(props) {
                                 <td className="px-4 py-3" id={`Item${props.List.indexOf(item)}`}>{item.Task}</td>
                                 <td className="px-4 py-3 flex gap-5">
                                     <button id={props.List.indexOf(item)} onClick={props.MarkAsCompleted}>Mark as completed</button>
-                                    <button id={props.List.indexOf(item)} onClick={props.DeleteItem}>Delete</button>
+                                    <button id={item.id} onClick={props.DeleteItem}>Delete</button>
                                 </td>
                             </tr>
                         ))

@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import Todolist from "./Todolist"
 
 export default function Todo() {
-	const [ListName,setListName] = useState("To Do")
-	const [EditListName,setEditListName] = useState(false)
+	const [ListName, setListName] = useState("To Do")
+	const [EditListName, setEditListName] = useState(false)
 	const [List, setList] = useState([])
 	const [Task, setTask] = useState({
 		Task: "",
-		Completed: false
+		Completed: false,
+		id : 0
 	})
 	const [completedCount, setCompletedCount] = useState(0)
+	const [Modified, setModified] = useState(false)
+	const [ListID, setListID] = useState(1)
 
 	const handleTaskInput = (e) => {
 		setTask({
 			Task: e.target.value,
-			Completed: false
+			Completed: false,
+			id : Task.id + 1
 		})
 	}
 
@@ -22,27 +26,25 @@ export default function Todo() {
 		List.push(Task)
 		setTask({
 			Task: "",
-			Completed: false
+			Completed: false,
+			id: Task.id
 		})
+		setModified(true)
 	}
 
 	const handleDeleteFromList = (e) => {
-		let newList = []
 		let Index = Number.parseInt(e.target.id)
-		for (const slno in List) {
-			if (Number.parseInt(slno) === Index) {
-				if (List[slno].Completed) {
-					setCompletedCount(completedCount - 1)
-				}
-				continue
+		setList(List.filter((item) => {
+			if (Number.parseInt(item.id) === Index && item.Completed) {
+				setCompletedCount(completedCount - 1)
 			}
-			newList.push(List[slno])
-		}
-		setList(newList)
+			return Number.parseInt(item.id) !== Index
+		}))
+		setModified(true)
 	}
 
 	const handelKeyPress = (e) => {
-		if(e.key === "Enter" && Task.Task !== ""){
+		if (e.key === "Enter" && Task.Task !== "") {
 			handleAddToList()
 		}
 	}
@@ -53,14 +55,15 @@ export default function Todo() {
 			if (Number.parseInt(slno) === Index) {
 				List[slno].Completed = !List[slno].Completed
 				document.getElementById(`Item${slno}`).classList.toggle("line-through")
-				if (List[slno].Completed) {
+				if (List[slno].Completed) {	
 					setCompletedCount(completedCount + 1)
 					document.getElementById(`${Index}`).innerHTML = "Mark as not completed"
 				}
-				else {
+				else{
 					setCompletedCount(completedCount - 1)
 					document.getElementById(`${Index}`).innerHTML = "Mark as completed"
 				}
+				setModified(true)
 			}
 		}
 	}
@@ -71,8 +74,8 @@ export default function Todo() {
 		document.getElementById("EditListNameInput").classList.toggle("hidden")
 		document.getElementById("EditListNameInput").focus()
 		document.getElementById("EditListName").classList.toggle("hidden")
-	}				
-	
+	}
+
 	const handleListNameChange = (e) => {
 		setListName(e.target.value)
 	}
@@ -82,15 +85,29 @@ export default function Todo() {
 			handleToggleEditMode()
 		}
 	}
+	
+	const saveList = () => {
+		let Lists = {
+			ListID : ListID,
+			ListName : ListName,
+			ListItems : List
+		}
+		setModified(false)
+		console.log(Lists)
+	}
 	return (
 		<div className="container px-5 py-7 mx-auto">
 			<div className="flex flex-col text-center w-full mb-12 border-b-4 border-orange-700">
-				<input id = "EditListNameInput" type="text" value={ListName} onChange={handleListNameChange} className='hidden sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center' onKeyDown={handelEnterKeyPress}/>
-				<h1 id = "EditListName" className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" onClick={handleToggleEditMode}>{ListName}</h1>
-				<button className='rounded-2xl bg-blue-200 mr-3 px-3' onClick={handleToggleEditMode}>{!EditListName ? "Edit" : "Done"}</button>
+				<input id="EditListNameInput" type="text" value={ListName} onChange={handleListNameChange} className='hidden sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center' onKeyDown={handelEnterKeyPress} />
+				<h1 id="EditListName" className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" onClick={handleToggleEditMode}>{ListName}</h1>
+				<div className="flex">
+					<button className='rounded-2xl bg-blue-200 mr-3 px-3' onClick={handleToggleEditMode}>{!EditListName ? "Edit list nane" : "Done"}</button>
+					<button className='rounded-2xl bg-blue-200 mr-3 px-3 disabled:bg-blue-100 disabled:text-white' disabled={!Modified} onClick={saveList}>Save</button>
+				</div>
 			</div>
 
 			<Todolist List={List} DeleteItem={handleDeleteFromList} MarkAsCompleted={handleMarkAsCompleted} />
+
 
 			<div className="flex flex-row text-center w-full pb-5 border-t-4 border-orange-700 fixed left-0 right-0 bottom-0 bg-white">
 				<div className="flex flex-wrap -m-2 w-full mx-4">
