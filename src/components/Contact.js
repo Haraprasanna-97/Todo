@@ -43,7 +43,7 @@ export default function Contact() {
             alert("Please fill all requred fields")
         }
         else{
-            let response = await axios.post("http://localhost:3000/",{
+            let response = await axios.post("http://localhost:3001/feedback",{
                 Name : `${FirstName} ${LastName}`,
                 Phone : Phone,
                 Email : Email,
