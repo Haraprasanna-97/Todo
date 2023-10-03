@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Todolist from "./Todolist"
+import axios from 'axios'
 
 export default function Todo() {
 	const [ListName, setListName] = useState("To Do")
@@ -86,14 +87,18 @@ export default function Todo() {
 		}
 	}
 	
-	const saveList = () => {
-		let Lists = {
+	const saveList = async () => {
+		let ListDetails = {
 			ListID : ListID,
 			ListName : ListName,
 			ListItems : List
 		}
-		setModified(false)
-		console.log(Lists)
+		let response = await axios.post("http://localhost:3001/saveList",ListDetails)					
+		if(response.data.success){
+			console.log(response)
+			setModified(false)
+		}
+		console.log(ListDetails)
 	}
 	return (
 		<div className="container px-5 py-7 mx-auto">
@@ -107,7 +112,6 @@ export default function Todo() {
 			</div>
 
 			<Todolist List={List} DeleteItem={handleDeleteFromList} MarkAsCompleted={handleMarkAsCompleted} />
-
 
 			<div className="flex flex-row text-center w-full pb-5 border-t-4 border-orange-700 fixed left-0 right-0 bottom-0 bg-white">
 				<div className="flex flex-wrap -m-2 w-full mx-4">
