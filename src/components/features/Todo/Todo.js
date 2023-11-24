@@ -75,10 +75,14 @@ export default function Todo() {
 		document.getElementById("EditListNameInput").classList.toggle("hidden")
 		document.getElementById("EditListNameInput").focus()
 		document.getElementById("EditListName").classList.toggle("hidden")
+		if(Modified){
+			saveList()
+		}
 	}
 
 	const handleListNameChange = (e) => {
 		setListName(e.target.value)
+		setModified(true)
 	}
 
 	const handelEnterKeyPress = (e) => {
