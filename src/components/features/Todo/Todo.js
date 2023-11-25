@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Todolist from "./Todolist"
 import axios from 'axios'
+import { useEffect } from 'react'
 
 export default function Todo() {
 	const [ListName, setListName] = useState("To Do")
@@ -14,6 +15,19 @@ export default function Todo() {
 	const [completedCount, setCompletedCount] = useState(0)
 	const [Modified, setModified] = useState(false)
 	const [ListID, setListID] = useState(1)
+
+	useEffect(() => {
+		async function getList() {
+			let response = await axios.get("http://localhost:3001/getList")					
+				if(response.data.success){
+					console.log(response.data.data)
+					setListID(response.data.data.ListID)
+					setListName(response.data.data.ListName)
+					setList(response.data.data.ListItems)
+				}
+			}
+		getList()
+	},[])
 
 	const handleTaskInput = (e) => {
 		setTask({
