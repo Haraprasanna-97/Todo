@@ -24,6 +24,8 @@ export default function Todo() {
 					setListID(response.data.data.ListID)
 					setListName(response.data.data.ListName)
 					setList(response.data.data.ListItems)
+					// let Completed = 
+					setCompletedCount(response.data.data.ListItems.filter((a) => a.Completed,response.data.data).length)
 				}
 			}
 		getList()
